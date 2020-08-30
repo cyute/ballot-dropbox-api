@@ -1,0 +1,20 @@
+{
+  "name": "ballot-dropbox-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The is the backend API for ballot dropbox using serverless",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "serverless deploy --stage prod",
+    "remove": "serverless remove --stage prod"
+  },
+  "author": "cyute77@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.61",
+    "serverless": "^1.80.0",
+    "serverless-offline": "^6.7.0",
+    "serverless-plugin-typescript": "^1.1.9",
+    "typescript": "^4.0.2"
+  }
+}

@@ -4,13 +4,19 @@ provider:
   name: aws
   runtime: nodejs12.x
 
+custom:
+  serverless-offline:
+    httpPort: 4000
+    noPrependStageInUrl: true
+
 functions:
-  hello:
-    handler: handler.hello
+  getLocation:
+    handler: location/handler.get
     events:
       - http:
-          path: /
+          path: location
           method: get
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-offline

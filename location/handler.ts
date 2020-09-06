@@ -40,6 +40,10 @@ export const get: Handler = async (event: APIGatewayEvent): Promise<APIGatewayPr
   const location = await geocodeAddress(queryString.address);
   const response = {
     statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': 'http://ballot-dropboxes.s3-website-us-east-1.amazonaws.com',
+      'Access-Control-Allow-Credentials': true,
+    },
     body: JSON.stringify({ location }, null, 2),
   };
   return response;

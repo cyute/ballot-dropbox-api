@@ -16,6 +16,7 @@ functions:
       - http:
           path: location
           method: get
+          cors: true
 
 plugins:
   - serverless-plugin-typescript

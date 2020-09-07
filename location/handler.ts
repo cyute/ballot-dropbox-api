@@ -3,14 +3,21 @@ import { Client, AddressType } from "@googlemaps/google-maps-services-js";
 import { GeocodeResponseData, GeocodeResponse } from '@googlemaps/google-maps-services-js/dist/geocode/geocode';
 import { LocationResponseData } from './types';
 
-const geocodeAddress = async (address: string) => {
-  const client = new Client({});
-  return client.geocode({
+const CACHE: Map<string, GeocodeResponseData> = new Map<string, GeocodeResponseData>();
+const GEOCODE_CLIENT = new Client({});
+
+const geocodeAddress = async (address: string): Promise<LocationResponseData | undefined> => {
+  const data = CACHE.get(address);
+  if (data) {
+    return handleGeocodeResults(data);
+  }
+  return GEOCODE_CLIENT.geocode({
     params: {
       address,
       key: 'AIzaSyCHh4tuphAmtLJoOeBz68YEOjHS_4bC5Bo',
     }
   }).then((response: GeocodeResponse) => {
+    CACHE.set(address, response.data);
     return handleGeocodeResults(response.data)
   });
 }

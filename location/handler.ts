@@ -5,6 +5,7 @@ import { LocationResponseData } from './types';
 
 const CACHE: Map<string, GeocodeResponseData> = new Map<string, GeocodeResponseData>();
 const GEOCODE_CLIENT = new Client({});
+const API_KEY = process.env.GOOGLE_GEOCODE_API_KEY || '';
 
 const geocodeAddress = async (address: string): Promise<LocationResponseData | undefined> => {
   const data = CACHE.get(address);
@@ -14,7 +15,7 @@ const geocodeAddress = async (address: string): Promise<LocationResponseData | u
   return GEOCODE_CLIENT.geocode({
     params: {
       address,
-      key: 'AIzaSyCHh4tuphAmtLJoOeBz68YEOjHS_4bC5Bo',
+      key: API_KEY,
     }
   }).then((response: GeocodeResponse) => {
     CACHE.set(address, response.data);

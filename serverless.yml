@@ -3,6 +3,8 @@ service: aws-node-rest-api-typescript
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    GOOGLE_GEOCODE_API_KEY: ${env:GOOGLE_GEOCODE_API_KEY}
 
 custom:
   serverless-offline:
@@ -21,3 +23,4 @@ functions:
 plugins:
   - serverless-plugin-typescript
   - serverless-offline
+  - serverless-dotenv-plugin

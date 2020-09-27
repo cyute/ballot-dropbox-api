@@ -27,7 +27,7 @@ const handleGeocodeResults = (data: GeocodeResponseData): LocationResponseData |
   if (!data || !data.results || data.results.length === 0) {
     return undefined;
   }
-  const { address_components, geometry, formatted_address } = data.results[0];
+  const { address_components, geometry, formatted_address, place_id } = data.results[0];
   const city = address_components.find(component => component.types.includes(AddressType.locality))?.long_name;
   const state = address_components.find(component => component.types.includes(AddressType.administrative_area_level_1))?.short_name;
   if (city && state) {
@@ -39,6 +39,7 @@ const handleGeocodeResults = (data: GeocodeResponseData): LocationResponseData |
         lat: geometry.location.lat,
         lng: geometry.location.lng,
       },
+      placeId: place_id,
     };
     return location;
   }
